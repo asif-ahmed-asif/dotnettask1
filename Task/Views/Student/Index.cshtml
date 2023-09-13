@@ -1,0 +1,63 @@
+﻿@model IEnumerable<Student> 
+
+@{
+    ViewData["Title"] = "Index";
+}
+
+<div class="container p-3">
+    <div class="row pt-4">
+        <div class="col-6">
+            <h2 class="text-primary">List of Students</h2>
+        </div>
+        <div class="col-6 text-end">
+            <a asp-controller="Student" asp-action="Create" class="btn btn-primary">
+                <i class="bi bi-plus-circle"></i> Add New Student Info
+            </a>
+        </div>
+    </div>
+    <br />
+
+
+<table class="table table-bordered table-striped" style="width:100%">
+    <thead>
+        <tr class="text-center">
+            <th>Name</th>
+            <th>Class</th>
+            <th>DOB</th>
+            <th>Gender</th>
+            <th>Action</th>
+        </tr>
+    </thead>
+    <tbody>
+        @foreach(var data in Model)
+        {
+            <tr class="text-center">
+                <td>@data.Name</td>
+                <td>@data.Class?.Name</td>
+                <td>@data.DOB.ToString("dd-MM-yyyy")</td>
+                    @{
+                        if (data.Gender == 1)
+                        {
+                            <td>Male</td>
+                        }else{
+                            <td>Female</td>
+                        }
+                    }
+
+                <td>
+                    <div class="w-75 btn-group" role="group">
+                            <a asp-action="Edit" asp-route-id="@data.Id" class="btn btn-primary mx-2">
+                                <i class="bi bi-pencil-square"></i> Edit </a>
+                            <a asp-action="Details" asp-route-id="@data.Id" class="btn btn-info mx-2">
+                                <i class="bi bi-file-text"></i> Details</a>
+                            <a asp-action="Delete" asp-route-id="@data.Id" class="btn btn-danger">
+                                <i class="bi bi-trash3 mx-2"></i>Delete</a>
+                    </div>
+                </td>
+            </tr>
+        }
+
+    </tbody>
+
+</table>
+</div>

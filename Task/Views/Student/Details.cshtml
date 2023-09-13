@@ -1,0 +1,59 @@
+﻿@model Student
+
+@{
+    ViewData["Title"] = "Details";
+}
+
+<div class="row pt-4">
+    <div class="mx-auto col-10 col-md-8 col-lg-6">
+        <h2 class="text-primary">Student Details</h2>
+        <hr />
+            <div class="form-group mb-3">
+            <span style="font-size:25px;"> Id: </span>
+            <span class="text-success" style="font-size:25px;"> @Model.Id </span>
+        </div>
+            <div class="form-group mb-3">
+            <span style="font-size:25px;"> Name: </span>
+            <span class="text-success" style="font-size:25px;"> @Model.Name </span>
+        </div>
+            <div class="form-group mb-3">
+            <span style="font-size:25px;"> Class: </span>
+            <span class="text-success" style="font-size:25px;"> @Model.Class?.Name </span>
+        </div>
+            <div class="form-group mb-3">
+            <span style="font-size:25px;"> DOB: </span>
+            <span class="text-success" style="font-size:25px;"> @Model.DOB.ToString("dd-MM-yyyy") </span>
+        </div>
+            <div class="form-group mb-3">
+            <span style="font-size:25px;"> Gender: </span>
+            @{
+                if (Model.Gender == 1)
+                {
+                    <span class="text-success" style="font-size:25px;"> Male </span>
+                }
+                else
+                {
+                    <span class="text-success" style="font-size:25px;"> Female </span>
+                }
+            } 
+            </div>
+            <div class="form-group mb-3">
+            <span style="font-size:25px;">Creation Date: </span>
+            <span class="text-success" style="font-size:25px;"> @Model.CreatedDate.ToString("dd-MM-yyyy") </span>
+            </div>
+            <div class="form-group mb-3">
+            <span style="font-size:25px;">Modification Date: </span>
+            @{
+                if (Model.ModificationDate == null)
+                {
+                    <span class="text-danger" style="font-size:25px;">N/A</span>
+                }
+            }
+            <span class="text-success" style="font-size:25px;">@Model.ModificationDate?.ToString("dd-MM-yyyy") </span>
+            </div>
+            
+            <div>
+                <a asp-action="Index" class="btn btn-secondary" style="width:150px">Back to List</a>
+            </div>
+    </div>
+</div>

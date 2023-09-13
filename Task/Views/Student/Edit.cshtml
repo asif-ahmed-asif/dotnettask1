@@ -1,0 +1,52 @@
+﻿@model Student
+
+@{
+    ViewData["Title"] = "Edit";
+}
+
+<div class="row pt-4">
+    <div class="mx-auto col-10 col-md-8 col-lg-6">
+        <h2 class="text-primary">Edit Student</h2>
+        <hr />
+        <form asp-action="Edit">
+            <div asp-validation-summary="ModelOnly" class="text-danger"></div>
+            <div class="form-group mb-3">
+                <label asp-for="Name" class="control-label"></label>
+                <input asp-for="Name" class="form-control" />
+                <span asp-validation-for="Name" class="text-danger"></span>
+            </div>
+            <div class="form-group mb-3">
+                <label asp-for="ClassId" class="control-label"></label>
+                <select asp-for="ClassId" class ="form-control">
+                    @foreach (var data in ViewBag.Class)
+                    {
+                        <option value="@data.Id">@data.Name</option>
+                    }
+                </select>
+                <span asp-validation-for="ClassId" class="text-danger"></span>
+            </div>
+            <div class="form-group mb-3">
+                <label asp-for="DOB" class="control-label"></label>
+                <input asp-for="DOB" max="@DateTime.Now.ToString("yyyy-MM-dd")" class="form-control" />
+                <span asp-validation-for="DOB" class="text-danger"></span>
+            </div>
+            <div class="form-group mb-3">
+                <label asp-for="Gender" class="control-label"></label><br />
+                <input asp-for="Gender" id="Male" type="radio" value="1" class="form-check-input" />
+                <label for="Male" class="control-label">Male</label>
+                <input asp-for="Gender" id="Female" type="radio" value="2" class="form-check-input" />
+                <label for="Female" class="control-label">Female</label><br />
+                <span asp-validation-for="Gender" class="text-danger"></span>
+            </div>
+            <div class="form-group">
+                <input type="submit" value="Edit" class="btn btn-primary" style="width:150px" />
+                <a asp-action="Index" class="btn btn-secondary" style="width:150px">Back to List</a>
+            </div>
+        </form>
+    </div>
+</div>
+
+
+@section Scripts {
+    @{await Html.RenderPartialAsync("_ValidationScriptsPartial");}
+}
